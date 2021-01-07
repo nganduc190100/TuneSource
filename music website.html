@@ -1,0 +1,322 @@
+<?php
+  <!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <base href="http://suaxachtayuc.com/nhac/" />
+        <title>Project Nhac - By Phuc</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <link rel="icon" type="image/png" href="public/images/nhac.png" />
+        <!-- Font -->
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <!-- Css -->
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+        <link href="public/css/style.css" rel="stylesheet">
+        <!-- Js -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+        <!-- Ajax -->
+        <script src="public/js/ajax_tim_kiem/tim_album_ajax.js"></script>
+        <script src="public/js/ajax_tim_kiem/tim_baihat_ajax.js"></script>
+        <script src="public/js/ajax_tim_kiem/tim_casi_ajax.js"></script>
+    </head>
+    <body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark" style="background: coral;">
+            <div class="res-navbar row">
+                <div class="row">
+                    <div class="toggle-navbar col-4 hidden-lg-up">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    </div>
+                    <!-- Brand -->
+                    <div class="brand-navbar col-6 d-sm-none">
+                        <a class="navbar-brand" href=".">Logo</a>
+                    </div>
+                </div>
+                <div class="brand-navbar col-sm-1 col-lg-1 d-none d-sm-block">
+                    <a class="navbar-brand" href=".">Logo</a>
+                </div>
+                <!-- Links -->
+
+                <div class="collapse navbar-collapse col-sm-11 col-lg-11" id="nav-content">   
+                    <ul class="navbar-nav row">
+                        <div class="items-navbar d-none d-sm-block col-sm-6 col-lg-4">
+                                                    <li class="d-inline">
+                                <a href="dang_nhap.php" role="button" class="btn btn-success ml-1 mr-2" >Đăng nhập</a> 
+                            </li>
+                            <li class="d-inline">
+                                <a href="dang_ky.php" role="button" class="btn btn-primary ml-1 mr-2" >Đăng ký tài khoản mới</a> 
+                            </li>
+                                                </div>
+                        <div class="khung-tim-kiem col-12 col-sm-5 col-md-3 col-lg-3 col-xl-2">
+                            <form class="form-inline" action="#" method="post" autocomplete="off">
+                                <input name="search" id="search" class="form-control mr-sm-2" type="text" placeholder="Nhập nội dung cần tìm kiếm">
+                            </form>
+                            <div class="hien-thi-tim-kiem">
+                                <div id="result-album"></div>
+                                <div id="result-tenBaihat"></div>
+                                <div id="result-tenCaSi"></div>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+        <div class="wrapper-page">
+        <div class="wrap-body container">
+            <div class="row content-row">
+                <div class="wrap-content col-12 col-md-9 col-lg-9 col-xl-9">
+                    <div class="slider-area">
+                    <!-- Slider -->
+                        <div class="block-slider block-slider4">
+                            <ul class="" id="bxslider-home4">
+                                                                <li>
+                                    <a href="playlist/37/tong-hop-huong-tram.htm">
+                                        <img src="public/images/anhslider/1.jpg" alt="Nhạc Việt nghe nhiều nhất"/>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="playlist/39/dance-vpop-2017.htm">
+                                        <img src="public/images/anhslider/2.jpg" alt="Playlist dance 2017"/>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="playlist/38/giong-hat-moi.htm">
+                                        <img src="public/images/anhslider/3.jpg" alt="Playlist giọng hát mới"/>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="playlist/36/viet-cover.htm">
+                                        <img src="public/images/anhslider/4.jpg" alt="playlist nhạc nước ngoài"/>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    <!-- ./Slider -->
+                    </div> <!-- End slider area -->
+                    <div class="section">
+                        <h2 class="title-section">Album bài hát mới</h2>
+                        <div class="row">
+                                                    <div class="item col-6 col-sm-6 col-md-3 col-lg-3">
+                                <div class="thumbs">
+                                    <a>
+                                        <img  class="thumb img-fluid w3-hover-sepia" src="public/images/albums/50beb39617ed9c894b16483a4738ab42_1509446266.jpg" alt="Dance VPOP 2017">
+                                    </a>
+                                    <a href="playlist/39/dance-vpop-2017.htm">
+                                        <img class="play-link w3-animate-zoom" src="public/images/icons/play-button.png" />
+                                    </a>
+                                </div>
+                                <h3 class="title-item">
+                                        <span><a class="title_name" href="playlist/39/dance-vpop-2017.htm">Dance VPOP 2017</a></span>
+                                </h3>
+                                <h4 class="singer-name">
+                                        <span><a class="size_name" href="casi.php?id=44" title="Nhiều ca sĩ">Nhiều ca sĩ</a></span>
+                                </h4>      
+                            </div>
+                                                    <div class="item col-6 col-sm-6 col-md-3 col-lg-3">
+                                <div class="thumbs">
+                                    <a>
+                                        <img  class="thumb img-fluid w3-hover-sepia" src="public/images/albums/c95ef511ab1c608e129292da2ad8526b_1509359712.jpg" alt="Giọng hát mới">
+                                    </a>
+                                    <a href="playlist/38/giong-hat-moi.htm">
+                                        <img class="play-link w3-animate-zoom" src="public/images/icons/play-button.png" />
+                                    </a>
+                                </div>
+                                <h3 class="title-item">
+                                        <span><a class="title_name" href="playlist/38/giong-hat-moi.htm">Giọng hát mới</a></span>
+                                </h3>
+                                <h4 class="singer-name">
+                                        <span><a class="size_name" href="casi.php?id=44" title="Nhiều ca sĩ">Nhiều ca sĩ</a></span>
+                                </h4>      
+                            </div>
+                                                    <div class="item col-6 col-sm-6 col-md-3 col-lg-3">
+                                <div class="thumbs">
+                                    <a>
+                                        <img  class="thumb img-fluid w3-hover-sepia" src="public/images/albums/953a42c7ee7974a0670462fabb6bdb06_1501843491.jpg" alt="Tổng hợp Hương Tràm">
+                                    </a>
+                                    <a href="playlist/37/tong-hop-huong-tram.htm">
+                                        <img class="play-link w3-animate-zoom" src="public/images/icons/play-button.png" />
+                                    </a>
+                                </div>
+                                <h3 class="title-item">
+                                        <span><a class="title_name" href="playlist/37/tong-hop-huong-tram.htm">Tổng hợp Hương Tràm</a></span>
+                                </h3>
+                                <h4 class="singer-name">
+                                        <span><a class="size_name" href="casi.php?id=46" title="Hương Tràm">Hương Tràm</a></span>
+                                </h4>      
+                            </div>
+                                                    <div class="item col-6 col-sm-6 col-md-3 col-lg-3">
+                                <div class="thumbs">
+                                    <a>
+                                        <img  class="thumb img-fluid w3-hover-sepia" src="public/images/albums/db53f15f684bb8073fd53ecf26ad70a2_1406709708.jpg" alt="Việt Cover">
+                                    </a>
+                                    <a href="playlist/36/viet-cover.htm">
+                                        <img class="play-link w3-animate-zoom" src="public/images/icons/play-button.png" />
+                                    </a>
+                                </div>
+                                <h3 class="title-item">
+                                        <span><a class="title_name" href="playlist/36/viet-cover.htm">Việt Cover</a></span>
+                                </h3>
+                                <h4 class="singer-name">
+                                        <span><a class="size_name" href="casi.php?id=44" title="Nhiều ca sĩ">Nhiều ca sĩ</a></span>
+                                </h4>      
+                            </div>
+                        
+                        </div>
+                        <h2 class="title-section">Bài hát mới</h2>
+                        <div class="row">
+                                                    <div class="item col-6 col-sm-6 col-md-3 col-lg-3">
+                                <div class="thumbs">
+                                    <a>
+                                        <img  class="thumb img-fluid w3-hover-sepia" src="public/images/anhcasi/68bcf97b41cd37e918cdf2dc0b85e895_1509438182.jpg" alt="Test1111">
+                                    </a>
+                                    <a href="bai-hat/test1111/208.htm">
+                                        <img class="play-link w3-animate-zoom" src="public/images/icons/play-button.png" />
+                                    </a>
+                                </div>
+                                <h3 class="title-item">
+                                        <span><a class="title_name" href="bai-hat/test1111/208.htm">Sống xa anh chẳng dễ dàng</a></span>
+                                </h3>
+                                <h4 class="singer-name">
+                                        <span><a class="size_name" href="casi.php?id=62" title="Bảo Anh">Bảo Anh</a></span>
+                                </h4>      
+                            </div>
+                                                    <div class="item col-6 col-sm-6 col-md-3 col-lg-3">
+                                <div class="thumbs">
+                                    <a>
+                                        <img  class="thumb img-fluid w3-hover-sepia" src="public/images/anhcasi/1250fc39417b3822a7672ad957562a35_1509607623.jpg" alt="Nơi Bình Yên">
+                                    </a>
+                                    <a href="bai-hat/noi-binh-yen/198.htm">
+                                        <img class="play-link w3-animate-zoom" src="public/images/icons/play-button.png" />
+                                    </a>
+                                </div>
+                                <h3 class="title-item">
+                                        <span><a class="title_name" href="bai-hat/noi-binh-yen/198.htm">Nơi Bình Yên</a></span>
+                                </h3>
+                                <h4 class="singer-name">
+                                        <span><a class="size_name" href="casi.php?id=54" title="Trịnh Đình Quang">Trịnh Đình Quang</a></span>
+                                </h4>      
+                            </div>
+                                                    <div class="item col-6 col-sm-6 col-md-3 col-lg-3">
+                                <div class="thumbs">
+                                    <a>
+                                        <img  class="thumb img-fluid w3-hover-sepia" src="public/images/anhcasi/artworks-000215052508-22m8a2-t500x500.jpg" alt="Hai thế giới">
+                                    </a>
+                                    <a href="bai-hat/hai-the-gioi/195.htm">
+                                        <img class="play-link w3-animate-zoom" src="public/images/icons/play-button.png" />
+                                    </a>
+                                </div>
+                                <h3 class="title-item">
+                                        <span><a class="title_name" href="bai-hat/hai-the-gioi/195.htm">Hai thế giới</a></span>
+                                </h3>
+                                <h4 class="singer-name">
+                                        <span><a class="size_name" href="casi.php?id=46" title="Hương Tràm">Hương Tràm</a></span>
+                                </h4>      
+                            </div>
+                                                    <div class="item col-6 col-sm-6 col-md-3 col-lg-3">
+                                <div class="thumbs">
+                                    <a>
+                                        <img  class="thumb img-fluid w3-hover-sepia" src="public/images/anhcasi/artworks-000157138501-1gy812-t500x500.jpg" alt="das">
+                                    </a>
+                                    <a href="bai-hat/das/191.htm">
+                                        <img class="play-link w3-animate-zoom" src="public/images/icons/play-button.png" />
+                                    </a>
+                                </div>
+                                <h3 class="title-item">
+                                        <span><a class="title_name" href="bai-hat/das/191.htm">das</a></span>
+                                </h3>
+                                <h4 class="singer-name">
+                                        <span><a class="size_name" href="casi.php?id=43" title="Bích Ngọc">Bích Ngọc</a></span>
+                                </h4>      
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+                <div class="wrap-xep-hang col-12 col-md-3 col-lg-3 col-xl-3">
+                    <div class="ca_si_viet_nam">
+                        <a href="danh_sach_ca_si.php">
+                            <img class="anhXepHang" src="public/images/anhcasi/ca_si_viet_nam.jpg" />
+                        </a>
+                    </div>
+                    <div class="nhung_bai_hit_moi">
+                        <img class="anhXepHang" src="public/images/anhcasi/nhung_bai_hit_moi.jpg" />
+                    </div>
+                    <div class="nhac_phim">
+                        <img class="anhXepHang" src="public/images/anhcasi/nhac_phim.jpg" />
+                    </div>
+                    <div class="nhac_hot">
+                        <img class="anhXepHang" src="public/images/anhcasi/nhac_hot.jpg" />
+                    </div>
+                    <h2 class="title_xep_hang">Bảng xếp hạng</h2>
+                                                    <ul class="itemm">
+                                <li class="stt-xh">1</li>
+                                <li class="title-item-xh"><span><a href="bai-hat/i-dont-want/160.htm">I Dont Want</a></span></li>
+                                <li class="view-xh"><span>177</span></li>
+                            </ul>
+                                                    <ul class="itemm">
+                                <li class="stt-xh">2</li>
+                                <li class="title-item-xh"><span><a href="bai-hat/di-ve-dau/156.htm">Đi Về Đâu</a></span></li>
+                                <li class="view-xh"><span>169</span></li>
+                            </ul>
+                                                    <ul class="itemm">
+                                <li class="stt-xh">3</li>
+                                <li class="title-item-xh"><span><a href="bai-hat/de-em-roi-xa/155.htm">Để Em Rời Xa</a></span></li>
+                                <li class="view-xh"><span>135</span></li>
+                            </ul>
+                                                    <ul class="itemm">
+                                <li class="stt-xh">4</li>
+                                <li class="title-item-xh"><span><a href="bai-hat/tam-su-voi-nguoi-la---cover/149.htm">Tâm sự với người lạ - cover</a></span></li>
+                                <li class="view-xh"><span>118</span></li>
+                            </ul>
+                                                    <ul class="itemm">
+                                <li class="stt-xh">5</li>
+                                <li class="title-item-xh"><span><a href="bai-hat/van-luon-mong-cho/152.htm">Vẫn Luôn Mong Chờ</a></span></li>
+                                <li class="view-xh"><span>110</span></li>
+                            </ul>
+                                                    <ul class="itemm">
+                                <li class="stt-xh">6</li>
+                                <li class="title-item-xh"><span><a href="bai-hat/giot-buon-de-lai/150.htm">Giọt Buồn Để Lại</a></span></li>
+                                <li class="view-xh"><span>101</span></li>
+                            </ul>
+                                                    <ul class="itemm">
+                                <li class="stt-xh">7</li>
+                                <li class="title-item-xh"><span><a href="bai-hat/dung-di/166.htm">Đừng Đi</a></span></li>
+                                <li class="view-xh"><span>75</span></li>
+                            </ul>
+                                                    <ul class="itemm">
+                                <li class="stt-xh">8</li>
+                                <li class="title-item-xh"><span><a href="bai-hat/roi/151.htm">Rơi</a></span></li>
+                                <li class="view-xh"><span>69</span></li>
+                            </ul>
+                                                    <ul class="itemm">
+                                <li class="stt-xh">9</li>
+                                <li class="title-item-xh"><span><a href="bai-hat/quen/164.htm">Quên</a></span></li>
+                                <li class="view-xh"><span>61</span></li>
+                            </ul>
+                                                    <ul class="itemm">
+                                <li class="stt-xh">10</li>
+                                <li class="title-item-xh"><span><a href="bai-hat/tuy-am/162.htm">Túy Âm</a></span></li>
+                                <li class="view-xh"><span>50</span></li>
+                            </ul>  
+                            </div>
+                         </div>
+                         </div>
+                         </div>
+ <footer class="w3-center w3-padding-16">
+ <p>Project nhạc</p>
+</footer>
+ <!-- JS Bootstrap -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+ <!-- JS Slider -->
+ <script type="text/javascript" src="public/js/slider/bxslider.min.js"></script>
+ <script type="text/javascript" src="public/js/slider/script.slider.js"></script>
+ ?>
+</body>
+</html>

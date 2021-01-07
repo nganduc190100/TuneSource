@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)http://suaxachtayuc.com/nhac/playlist/37/tong-hop-huong-tram.htm -->
+<html lang="vi"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!--<base href="http://suaxachtayuc.com/nhac/">--><base href=".">
+        <title>Project Nhac - By Phuc</title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <link rel="icon" type="image/png" href="http://suaxachtayuc.com/nhac/public/images/nhac.png">
+        <!-- Font -->
+        <link href="./audio2_files/font-awesome.min.css" rel="stylesheet">
+        <!-- Css -->
+        <link rel="stylesheet" href="./audio2_files/w3.css">
+        <link rel="stylesheet" href="./audio2_files/bootstrap.min.css">
+        <link href="./audio2_files/style.css" rel="stylesheet">
+        <!-- Js -->
+        <script src="./audio2_files/jquery.min.js.tải xuống"></script>
+        <script src="./audio2_files/jquery.min.js(1).tải xuống"></script>
+        <!-- Ajax -->
+        <script src="./audio2_files/tim_album_ajax.js.tải xuống"></script>
+        <script src="./audio2_files/tim_baihat_ajax.js.tải xuống"></script>
+        <script src="./audio2_files/tim_casi_ajax.js.tải xuống"></script>
+    </head>
+    <body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark" style="background: coral;">
+            <div class="res-navbar row">
+                <div class="row">
+                    <div class="toggle-navbar col-4 hidden-lg-up">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    </div>
+                    <!-- Brand -->
+                    <div class="brand-navbar col-6 d-sm-none">
+                        <a class="navbar-brand" href="http://suaxachtayuc.com/nhac/">Logo</a>
+                    </div>
+                </div>
+                <div class="brand-navbar col-sm-1 col-lg-1 d-none d-sm-block">
+                    <a class="navbar-brand" href="http://suaxachtayuc.com/nhac/">Logo</a>
+                </div>
+                <!-- Links -->
+
+                <div class="collapse navbar-collapse col-sm-11 col-lg-11" id="nav-content">   
+                    <ul class="navbar-nav row">
+                        <div class="items-navbar d-none d-sm-block col-sm-6 col-lg-4">
+                                                    <li class="d-inline">
+                                <a href="http://suaxachtayuc.com/nhac/dang_nhap.php" role="button" class="btn btn-success ml-1 mr-2">Đăng nhập</a> 
+                            </li>
+                            <li class="d-inline">
+                                <a href="http://suaxachtayuc.com/nhac/dang_ky.php" role="button" class="btn btn-primary ml-1 mr-2">Đăng ký tài khoản mới</a> 
+                            </li>
+                                                </div>
+                        <div class="khung-tim-kiem col-12 col-sm-5 col-md-3 col-lg-3 col-xl-2">
+                            <form class="form-inline" action="http://suaxachtayuc.com/nhac/#" method="post" autocomplete="off">
+                                <input name="search" id="search" class="form-control mr-sm-2" type="text" placeholder="Nhập nội dung cần tìm kiếm">
+                            </form>
+                            <div class="hien-thi-tim-kiem">
+                                <div id="result-album"></div>
+                                <div id="result-tenBaihat"></div>
+                                <div id="result-tenCaSi"></div>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <script src="./audio2_files/script.js.tải xuống"></script>
+<script>
+$(document).ready(function() {
+    var newPlaylist = ["152","161","195"];
+    audioElement = new Audio();
+    console.log(audioElement)
+    setTrack(newPlaylist[0], newPlaylist, false);
+    capnhatAmLuong(audioElement.audio)
+    $(".nhac-dang-choi").on("mousedown touchstart mousemove touchmove", function(e){
+        e.preventDefault();
+    })
+    $(".playbackBar .progressBar").mousedown(function(){
+        mouseDown = true; //cho phép đặt chuột xuống
+    });
+    $(".playbackBar .progressBar").mousemove(function(e){
+        if(mouseDown == true){ // Nếu cho phép đặt chuột xuống
+            //đặt lại thời gian của bài hát, tùy thuộc vào vị trí của chuột
+            datLaiThoiGian(e, this);
+        }
+    });
+    $(".playbackBar .progressBar").mouseup(function(e){
+            datLaiThoiGian(e, this);
+    })
+
+
+    $(".volumeBar .progressBar").mousedown(function(){
+        mouseDown = true; //cho phép đặt chuột xuống
+    });
+    $(".volumeBar .progressBar").mousemove(function(e){
+        if(mouseDown == true){ 
+            datLaiAmThanh(e, this);
+        }
+    });
+    $(".volumeBar .progressBar").mouseup(function(e){
+            datLaiAmThanh(e, this);
+    })
+
+
+    $(document).mouseup(function(){
+            mouseDown = false; 
+    });
+});
+
+function datLaiAmThanh(mouse, progressBar){
+    var percentage = mouse.offsetX / $(progressBar).width();
+        if(percentage >= 0 && percentage <= 1){
+                audioElement.audio.volume = percentage;
+        }
+}
+
+function datLaiThoiGian(mouse, progressBar){ //mouse = , progressBar = this
+    var percentage = mouse.offsetX / $(progressBar).width() * 100; //Tính phần trăm
+    var seconds = audioElement.audio.duration * (percentage/100); //Tính số giay bằng thời gian bài hát * (phần trăm/100)
+    audioElement.setTime(seconds); //Gọi set phương thức lại thời gian trong script.js
+}
+function prevSong(){
+    if(audioElement.audio.currentTime>=5 || currentIndex == 0){
+        audioElement.setTime(0);
+    }else{
+        currentIndex = currentIndex-1;
+        setTrack(currentPlaylist[currentIndex], currentPlaylist, true)
+    }
+}
+function nextSong() {
+    if(repeat == true) {
+        audioElement.setTime(0);
+        playSong();
+        return;
+    }
+
+    if(currentIndex == currentPlaylist.length - 1) {
+        currentIndex = 0;
+    }
+    else {
+        currentIndex++;
+    }
+
+    var trackToPlay = shuffle ? shufflePlaylist[currentIndex] : currentPlaylist[currentIndex];
+    setTrack(trackToPlay, currentPlaylist, true);
+}
+function setRepeatSong(){
+    //Nếu repeat = true thì repeat trong function = false và ngược lại
+    repeat = !repeat;
+    var imageRepeat = repeat ? "repeat-active.png":"repeat.png";
+    $(".repeat img").attr("src","public/images/icons/"+imageRepeat);
+}
+function setMute(){
+    audioElement.audio.muted = !audioElement.audio.muted;
+    var imageMute = audioElement.audio.muted ? "volume-mute.png":"volume.png";
+    $(".volume img").attr("src","public/images/icons/"+imageMute);
+}
+function setShuffle(){
+    shuffle = !shuffle;
+    var imageNgauNhien = shuffle?"shuffle-active.png":"shuffle.png";
+    $(".shuffle img").attr("src","public/images/icons/"+imageNgauNhien);
+    console.log(shufflePlaylist)
+    console.log(currentPlaylist)
+    if(shuffle == true){
+        //Ngẫu nhiên bài hát trong playlist
+        shuffleArray(shufflePlaylist);
+        currentIndex = shufflePlaylist.indexOf(audioElement.currentlyPlaying.id);
+    }else{
+        currentIndex = currentPlaylist.indexOf(audioElement.currentlyPlaying.id);
+    }
+
+}
+function shuffleArray(a) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+}
+
+function setTrack(trackId, newPlaylist, play) {
+    if(newPlaylist != currentPlaylist) {
+        currentPlaylist = newPlaylist;
+        shufflePlaylist = currentPlaylist.slice();
+        shuffleArray(shufflePlaylist);
+    }
+
+    if(shuffle == true) {
+        currentIndex = shufflePlaylist.indexOf(trackId);
+    }
+    else {
+        currentIndex = currentPlaylist.indexOf(trackId);
+    }
+    pauseSong();
+
+    $.post("models/ajax/getSongJson.php", { songId: trackId }, function(data) {
+
+        var track = JSON.parse(data);
+        $(".trackNameBar span").text(track.tenBaiHat);
+        $(".trackNameBar a").attr("href", "song.php?id="+track.id);
+        $(".trackView span").text("Lượt nghe: "+track.luotNghe);
+        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                $(".playerControls").css("display", "none");
+	            $(".playerMobile").css("display", "block");
+	            $(".playerMobile audio").attr("src", track.path);
+        }
+        $.post("models/ajax/getCaSiJson.php", { artistId: track.caSi }, function(data) {
+                var artist = JSON.parse(data)
+                $(".artistNameBar a").text(artist.tenCaSi);
+                $(".artistNameBar a").attr("href", "casi.php?id="+artist.id);
+        });
+        $.post("models/ajax/getAlbumJson.php", { albumId: track.album }, function(data) {
+                var album = JSON.parse(data)
+                $('.albumImg').attr("src", album.artworkPath);
+        });
+        audioElement.setTrack(track);
+        playSong();
+        if(play == true) {
+            playSong();
+        }
+    });
+
+}
+function playSong() {
+    if(audioElement.audio.currentTime == 0) {
+        $.post("models/ajax/updateLuotNgheJson.php", { songId: audioElement.currentlyPlaying.id });
+    }
+
+    $(".controlButton.play").hide();
+    $(".controlButton.pause").show();
+    audioElement.play();
+}
+function pauseSong() {
+    $(".controlButton.play").show();
+    $(".controlButton.pause").hide();
+    audioElement.pause();
+}
+</script>
+    <div class="wrapper-page">
+        <div class="wrap-body container">
+            <div class="row">
+                <div class="bar-nhac col-12 col-lg-8">
+                    <div class="nhac-dang-choi">
+                        <div class="row">
+                            <div class="bar-nhac-trai col-12 col-sm-6 col-md-12 col-lg-12">
+                                <div class="content">
+                                    <span class="albumLink">
+                                    <img class="albumImg" src="./audio2_files/953a42c7ee7974a0670462fabb6bdb06_1501843491.jpg" alt="album">
+                                    </span>
+                                    <div class="item-right">
+                                        <span class="trackView">
+                                                <span>Lượt nghe: 113</span>
+
+                                        </span>
+                                        <span class="dangBoi">
+                                            Đăng bởi: <a href="http://suaxachtayuc.com/nhac/thanh_vien.php?id=102"><span> Võ Hồng Phúc</span></a>
+                                        </span><br>
+                                                                            </div>
+                                    <div class="trackInfoBar">
+                                        <span class="trackNameBar">
+                                            <a href="http://suaxachtayuc.com/nhac/song.php?id=152"><span>Vẫn Luôn Mong Chờ</span></a>
+                                        </span>
+                                        <span class="artistNameBar">
+                                            <a href="http://suaxachtayuc.com/nhac/casi.php?id=46">Hương Tràm</a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bar-nhac-giua col-12 col-sm-6 col-md-8 col-lg-8">
+                                <div class="content playerControls">
+                                    <div class="buttons">
+                                        <button class="controlButton shuffle" onclick="setShuffle()" title="Ngẫu nhiên bài hát">
+                                            <img src="./audio2_files/shuffle.png" alt="Ngẫu nhiên bài hát">
+                                        </button>
+                                        <button class="controlButton previous" onclick="prevSong()" title="Quay lại">
+                                            <img src="./audio2_files/previous.png" alt="Quay lại">
+                                        </button>
+                                        <button class="controlButton play" onclick="playSong()" title="Nghe nhạc" style="display: none;">
+                                            <img src="./audio2_files/play.png" alt="Nghe nhạc">
+                                        </button>
+                                        <button class="controlButton pause" title="Tạm dừng" onclick="pauseSong()" style="">
+                                            <img src="./audio2_files/pause.png" alt="Tạm dừng">
+                                        </button>
+                                        <button class="controlButton next" onclick="nextSong()" title="Tiếp theo">
+                                            <img src="./audio2_files/next.png" alt="Tiếp theo">
+                                        </button>
+                                        <button class="controlButton repeat" onclick="setRepeatSong()" title="Lặp lại bài hát">
+                                            <img src="./audio2_files/repeat.png" alt="Lặp lại bài hát">
+                                        </button>
+                                    </div>
+                                    <div class="playbackBar">
+                                        <span class="progressTime current">2:36</span>
+                                        <div class="progressBar">
+                                            <div class="progressBarbg">
+                                                <div class="progress" style="width: 59.5026%;"></div>
+                                            </div>
+                                        </div>
+                                        <span class="progressTime remaining">1:46</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bar-nhac-phai col-2 col-md-4 col-lg-4">
+                                <div class="volumeBar">
+                                    <button class="controlButton volume" onclick="setMute()" title="Âm lượng">
+                                        <img src="./audio2_files/volume.png" alt="Âm lượng">
+                                    </button>
+                                    <div class="progressBar">
+                                        <div class="progressBarbg">
+                                            <div class="progress" style="width: 100%;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content playerMobile" style="margin:10px 10px 5px 10px; display:none" ;="">
+                        <audio controls="">
+                          <source src="" type="audio/mpeg">
+                          Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                    <ul class="danh-sach-nhac">
+                        <li>
+                            <div class="item-danh-sach">
+                                <div class="row">
+                                                                    <div class="col-12 col-sm-8 col-md-10 col-lg-10">
+                                        <h3 class="title-item" onclick="setTrack(&quot;152&quot;,[&quot;152&quot;,&quot;161&quot;,&quot;195&quot;],true)">
+                                                <span>Vẫn Luôn Mong Chờ</span>
+                                        </h3>
+                                    </div>
+                                    <div class="ca-si-danh-sach col-sm-4 col-md-2 col-lg-2">
+                                        <p class="singer-name">
+                                               <i class="fa fa-headphones fa-1">113</i>
+                                                                                       </p>
+                                    </div>
+                                                                    <div class="col-12 col-sm-8 col-md-10 col-lg-10">
+                                        <h3 class="title-item" onclick="setTrack(&quot;161&quot;,[&quot;152&quot;,&quot;161&quot;,&quot;195&quot;],true)">
+                                                <span>Em Gái Mưa</span>
+                                        </h3>
+                                    </div>
+                                    <div class="ca-si-danh-sach col-sm-4 col-md-2 col-lg-2">
+                                        <p class="singer-name">
+                                               <i class="fa fa-headphones fa-1">39</i>
+                                                                                       </p>
+                                    </div>
+                                                                    <div class="col-12 col-sm-8 col-md-10 col-lg-10">
+                                        <h3 class="title-item" onclick="setTrack(&quot;195&quot;,[&quot;152&quot;,&quot;161&quot;,&quot;195&quot;],true)">
+                                                <span>Hai thế giới</span>
+                                        </h3>
+                                    </div>
+                                    <div class="ca-si-danh-sach col-sm-4 col-md-2 col-lg-2">
+                                        <p class="singer-name">
+                                               <i class="fa fa-headphones fa-1">28</i>
+                                                                                       </p>
+                                    </div>
+                                
+                                <script>
+                                tempPlaylist = ["152","161","195"]
+                                </script>
+                                </div>
+                            </div>  
+                        </li>
+                    </ul>
+                </div>
+                <div class="item_lien_quan">
+                <h2 class="title_item_bai_hat w3-text-teal">Album cùng thể loại</h2>
+                <ul class="w3-ul w3-card-4">
+                                    <li class="w3-bar">
+                        <img src="./audio2_files/3.jpg" class="w3-bar-item w3-circle w3-hide-small" style="width:86px">
+                    <div class="w3-bar-item">
+                        <a class="item_bai_hat" href="http://suaxachtayuc.com/nhac/playlist/35/nguyen-thac-bao-ngoc---cover.htm">Nguyễn Thạc Bảo Ngọc - Cover</a><br>
+                        <a class="item_ca_si" href="http://suaxachtayuc.com/nhac/casi.php?id=42">Nguyễn Thạc Bảo Ngọc</a>
+                    </div>
+                    </li>
+                                    <li class="w3-bar">
+                        <img src="./audio2_files/db53f15f684bb8073fd53ecf26ad70a2_1406709708.jpg" class="w3-bar-item w3-circle w3-hide-small" style="width:86px">
+                    <div class="w3-bar-item">
+                        <a class="item_bai_hat" href="http://suaxachtayuc.com/nhac/playlist/36/viet-cover.htm">Việt Cover</a><br>
+                        <a class="item_ca_si" href="http://suaxachtayuc.com/nhac/casi.php?id=44">Nhiều ca sĩ</a>
+                    </div>
+                    </li>
+                                    <li class="w3-bar">
+                        <img src="./audio2_files/c95ef511ab1c608e129292da2ad8526b_1509359712.jpg" class="w3-bar-item w3-circle w3-hide-small" style="width:86px">
+                    <div class="w3-bar-item">
+                        <a class="item_bai_hat" href="http://suaxachtayuc.com/nhac/playlist/38/giong-hat-moi.htm">Giọng hát mới</a><br>
+                        <a class="item_ca_si" href="http://suaxachtayuc.com/nhac/casi.php?id=44">Nhiều ca sĩ</a>
+                    </div>
+                    </li>
+                                    <li class="w3-bar">
+                        <img src="./audio2_files/50beb39617ed9c894b16483a4738ab42_1509446266.jpg" class="w3-bar-item w3-circle w3-hide-small" style="width:86px">
+                    <div class="w3-bar-item">
+                        <a class="item_bai_hat" href="http://suaxachtayuc.com/nhac/playlist/39/dance-vpop-2017.htm">Dance VPOP 2017</a><br>
+                        <a class="item_ca_si" href="http://suaxachtayuc.com/nhac/casi.php?id=44">Nhiều ca sĩ</a>
+                    </div>
+                    </li>
+                
+                </ul>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <footer class="w3-center w3-padding-16">
+  <p>Project nhạc</p>
+</footer>
+    
+    <!-- JS Bootstrap -->
+    <script src="./audio2_files/popper.min.js.tải xuống"></script>
+    <script src="./audio2_files/bootstrap.min.js.tải xuống"></script>
+    <!-- JS Slider -->
+    <script type="text/javascript" src="./audio2_files/bxslider.min.js.tải xuống"></script>
+    <script type="text/javascript" src="./audio2_files/script.slider.js.tải xuống"></script>
+    
+</body></html>
